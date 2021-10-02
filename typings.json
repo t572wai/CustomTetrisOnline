@@ -1,0 +1,9 @@
+{
+  "name": "customtetriswithtypescript",
+  "dependencies": {},
+  "globalDependencies": {
+    "howler": "registry:dt/howler#2.0.0+20170120225022",
+    "jquery": "registry:dt/jquery#1.10.0+20170310222111",
+    "jqueryui": "registry:dt/jqueryui#1.11.0+20161214061125"
+  }
+}

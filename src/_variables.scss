@@ -1,0 +1,56 @@
+$sizeOfMino-pc: 30px;
+$sizeOfDisplayedMino-pc: 20px;
+$sizeOfTopMino-pc: 7px;
+
+//$sizeOfMino: 15px;
+//$sizeOfDisplayedMino: 10px;
+//$sizeOfTopMino: 5px;
+
+:root {
+	--widthOfMatrix: 10;
+	--heightOfMatrix: 20;
+
+	--sizeOfMino: 15px;
+	--sizeOfDisplayedMino: calc(var(--sizeOfMino) * 2 / 3);
+	--sizeOfTopMino: calc(var(--sizeOfMino) / 4);
+}
+//$widthOfMatrix: 10;
+//$heightOfMatrix: 20;
+
+$color1: #f4f4f4;
+$color2: #3197ee;
+$accentColor: #005ba6;
+$baseColor: #efefef;
+$color3: #e6e6e6;
+
+$emptyColor: #0b1013;
+$iColor: #348fca;
+$oColor: #e7bd22;
+$sColor: #2aa55d;
+$zColor: #da4b3c;
+$jColor: #246eab;
+$lColor: #dc7a23;
+$tColor: #824597;
+$wallColor: gray;
+
+@mixin pc {
+	@media (pointer: fine) {
+		@content;
+	}
+}
+
+@mixin touch {
+	@media (pointer: coarse) {
+		@content;
+	}
+}
+
+@mixin setSize($w, $h) {
+	width: $w;
+	height: $h;
+}
+
+@mixin setGrid($r, $c) {
+	grid-template-rows: $r;
+	grid-template-columns: $c;
+}

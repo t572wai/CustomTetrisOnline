@@ -1,0 +1,320 @@
+@import 'variables';
+
+html {
+	height: 100%;
+	touch-action: manipulation;
+}
+body {
+	height: 100%;
+}
+img {
+	pointer-events: none;
+}
+
+#gameArea {
+	height: 90%;
+
+	display: none;
+
+	grid-template-rows: 10% min-content min-content min-content;
+	grid-template-columns: 1fr min-content 1fr;
+
+	grid-column-gap: 10px;
+	//grid-row-gap: 30px;
+
+	user-select: none;
+}
+
+#field {
+	grid-row: 1 / 4;
+	grid-column: 2;
+
+	display: grid;
+
+	width: auto;
+	height: auto;
+
+	//grid-template-rows: 7px $sizeOfMino;
+	//grid-template-columns: repeat(10, $sizeOfMino);
+	@include pc {
+		@include setGrid(
+			$sizeOfTopMino-pc repeat(var(--heightOfMatrix), $sizeOfMino-pc) 1fr,
+			repeat(var(--widthOfMatrix), $sizeOfMino-pc)
+		);
+	}
+	@include touch {
+		@include setGrid(
+			var(--sizeOfTopMino) repeat(var(--heightOfMatrix), var(--sizeOfMino)) 1fr,
+			repeat(var(--widthOfMatrix), var(--sizeOfMino))
+		);
+	}
+	grid-gap: 0px 0px;
+}
+
+#pauseArea {
+	grid-row: 1;
+	grid-column: 1;
+}
+
+#holdArea {
+	grid-row: 2;
+	grid-column: 1;
+
+	display: grid;
+	grid-template-columns: 1fr min-content;
+	grid-template-rows: min-content min-content;
+
+	margin-right: 30px;
+}
+
+#holdHead {
+	grid-row: 1;
+	grid-column: 2;
+
+	height: 20px;
+}
+
+#holdArea > .displayers {
+	/* border: 2px black solid; */
+	width: 90px;
+	height: 50px;
+
+	grid-row: 2;
+	grid-column: 2;
+}
+
+#scoreArea {
+	//margin-top: 30px;
+
+	grid-row: 3;
+	grid-column: 1;
+
+	@include touch {
+		font-size: small;
+	}
+}
+
+#nextArea {
+	grid-row: 1;
+	grid-column: 3;
+
+	display: grid;
+	grid-template-columns: min-content 1fr;
+	grid-template-rows: repeat(7, min-content);
+
+	grid-row-gap: 5px;
+}
+
+#nextArea > .displayers {
+	grid-column: 1;
+}
+#nextHead {
+	grid-column: 1;
+	height: 20px;
+}
+
+#buttonsToOperateArea {
+	grid-row: 4;
+	grid-column: 1 / 4;
+
+	display: grid;
+	grid-template-rows: repeat(4, 40px);
+	grid-template-columns: 1fr repeat(3, 100px) 1fr;
+
+	grid-row-gap: 10px;
+	grid-column-gap: 10px;
+}
+
+.buttonsToOperate {
+	@include setSize(68px, 68px);
+	border-radius: 34px;
+	font-size: 20px;
+	text-align: center;
+	margin: auto;
+	background-repeat: no-repeat;
+	background-size: 48px;
+	background-position: center;
+
+	&[data-operate='left'] {
+		grid-row: 2;
+		grid-column: 2;
+		background-image: url('imgs/right.png');
+		transform: rotate(180deg);
+		margin-top: -20px;
+	}
+	&[data-operate='right'] {
+		grid-row: 2;
+		grid-column: 4;
+		background-image: url('imgs/right.png');
+		margin-top: -20px;
+	}
+	&[data-operate='softDrop'] {
+		grid-row: 3;
+		grid-column: 3;
+		margin-top: -10px;
+		background-image: url('imgs/right.png');
+		transform: rotate(90deg);
+	}
+	&[data-operate='hardDrop'] {
+		background-image: url('imgs/right-double.png');
+		grid-row: 1;
+		grid-column: 3;
+		margin-top: 10px;
+		transform: rotate(90deg);
+	}
+	&[data-operate='leftRotation'] {
+		background-image: url('imgs/leftRotation.png');
+		grid-row: 4;
+		grid-column: 2;
+		margin-top: -10px;
+		background-position-x: calc(50% + 3px);
+	}
+	&[data-operate='rightRotation'] {
+		background-image: url('imgs/rightRotation.png');
+		grid-row: 4;
+		grid-column: 4;
+		margin-top: -10px;
+		background-position-x: calc(50% - 3px);
+	}
+	&[data-operate='hold'] {
+		grid-row: 4;
+		grid-column: 3;
+		@include setSize(auto, 40px);
+		margin-top: 20px;
+	}
+}
+
+#toKeyBindings {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#pauseButton {
+	@include setSize(56px, 56px);
+	display: none;
+
+	@include touch {
+		position: relative;
+		top: -20px;
+	}
+	//position: fixed;
+	//top: 20px;
+	//left: 20px;
+
+	padding: 4px;
+
+	background-image: url('imgs/menu.png');
+	background-origin: padding-box;
+	background-size: contain;
+	background-position: center;
+}
+
+.dialogs {
+	display: none;
+}
+
+#fromKeyToMainMenu {
+	margin-bottom: 15px;
+}
+
+button {
+	border: 3px solid $color3;
+
+	font-weight: bold;
+	font-size: 30px;
+	font-family: Arial;
+
+	/* width: 150px; */
+	height: 60px;
+
+	display: flex;
+	align-items: center;
+
+	background-color: $baseColor;
+
+	padding: 1px 6px;
+
+	@include pc {
+		@include setSize(auto, 60px);
+	}
+	@include touch {
+		@include setSize(auto, 40px);
+
+		padding: 10px;
+
+		margin-top: 25px;
+		margin-bottom: 25px;
+	}
+}
+button:hover {
+	border-color: $accentColor;
+}
+button:focus {
+	outline: none;
+}
+
+.radio {
+	margin: 0.5rem;
+	input[type='radio'] {
+		position: absolute;
+		opacity: 0;
+		+ .radio-label {
+			&:before {
+				content: '';
+				background: $baseColor;
+				border-radius: 100%;
+				border: 1px solid darken($baseColor, 25%);
+				display: inline-block;
+				width: 1.4em;
+				height: 1.4em;
+				position: relative;
+				top: -0.2em;
+				margin-right: 1em;
+				vertical-align: top;
+				cursor: pointer;
+				text-align: center;
+				transition: all 250ms ease;
+			}
+		}
+		&:checked {
+			+ .radio-label {
+				&:before {
+					background-color: $accentColor;
+					box-shadow: inset 0 0 0 4px $baseColor;
+				}
+			}
+		}
+		&:focus {
+			+ .radio-label {
+				&:before {
+					outline: none;
+					border-color: $accentColor;
+				}
+			}
+		}
+		&:disabled {
+			+ .radio-label {
+				&:before {
+					box-shadow: inset 0 0 0 4px $baseColor;
+					border-color: darken($baseColor, 25%);
+					background: darken($baseColor, 25%);
+				}
+			}
+		}
+		+ .radio-label {
+			&:empty {
+				&:before {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
+
+table {
+	border-collapse: collapse;
+
+	th {
+		color: $accentColor;
+	}
+}

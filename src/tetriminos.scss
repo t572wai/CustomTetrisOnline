@@ -1,0 +1,164 @@
+@import 'variables';
+
+.minos {
+	@include pc {
+		@include setSize($sizeOfMino-pc, $sizeOfMino-pc);
+	}
+	@include touch {
+		@include setSize(var(--sizeOfMino), var(--sizeOfMino));
+	}
+
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+
+	grid-row: calc(attr(data-y) - 2);
+	grid-column: calc(attr(data-x));
+
+	&.hideFallingMinos.fallingMinos.shaft {
+		background-image: url('imgs/question.png');
+		background-size: contain;
+		background-position: center;
+	}
+}
+
+.emptyMinos {
+	background-color: $emptyColor;
+}
+
+.iMinos {
+	background-color: $iColor;
+
+	&.hideFallingMinos.fallingMinos {
+		background-color: $emptyColor;
+	}
+}
+
+.oMinos {
+	background-color: $oColor;
+
+	&.hideFallingMinos.fallingMinos {
+		background-color: $emptyColor;
+	}
+}
+
+.sMinos {
+	background-color: $sColor;
+
+	&.hideFallingMinos.fallingMinos {
+		background-color: $emptyColor;
+	}
+}
+
+.zMinos {
+	background-color: $zColor;
+
+	&.hideFallingMinos.fallingMinos {
+		background-color: $emptyColor;
+	}
+}
+
+.jMinos {
+	background-color: $jColor;
+
+	&.hideFallingMinos.fallingMinos {
+		background-color: $emptyColor;
+	}
+}
+
+.lMinos {
+	background-color: $lColor;
+
+	&.hideFallingMinos.fallingMinos {
+		background-color: $emptyColor;
+	}
+}
+
+.tMinos {
+	background-color: $tColor;
+
+	&.hideFallingMinos.fallingMinos {
+		background-color: $emptyColor;
+	}
+}
+
+.wallMinos {
+	background-color: $wallColor;
+}
+
+.ghostMinos {
+	background-color: $emptyColor;
+
+	&.hideFallingMinos {
+		background-color: transparent;
+
+		&.ghostShaft {
+			background-color: $color3;
+		}
+	}
+}
+.ghostMinos {
+	content: '';
+	height: 50%;
+	width: 50%;
+	position: relative;
+	top: 25%;
+	left: 25%;
+}
+
+.iGhostMinos {
+	background-color: $iColor;
+}
+
+.oGhostMinos {
+	background-color: $oColor;
+}
+
+.sGhostMinos {
+	background-color: $sColor;
+}
+
+.zGhostMinos {
+	background-color: $zColor;
+}
+
+.jGhostMinos {
+	background-color: $jColor;
+}
+
+.lGhostMinos {
+	background-color: $lColor;
+}
+
+.tGhostMinos {
+	background-color: $tColor;
+}
+
+.displayers {
+	display: grid;
+
+	@include pc {
+		@include setGrid(
+			$c: repeat(4, $sizeOfDisplayedMino-pc),
+			$r: repeat(2, $sizeOfDisplayedMino-pc)
+		);
+	}
+
+	@include touch {
+		@include setGrid(
+			$c: repeat(4, var(--sizeOfDisplayedMino)),
+			$r: repeat(2, var(--sizeOfDisplayedMino))
+		);
+	}
+
+	//grid-template-columns: repeat(4, $sizeOfDisplayedMino);
+	//grid-template-rows: repeat(2, $sizeOfDisplayedMino);
+}
+.displayers .minos {
+	@include pc {
+		@include setSize($sizeOfDisplayedMino-pc, $sizeOfDisplayedMino-pc);
+	}
+
+	@include touch {
+		@include setSize(var(--sizeOfDisplayedMino), var(--sizeOfDisplayedMino));
+	}
+}
